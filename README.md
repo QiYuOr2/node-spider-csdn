@@ -42,7 +42,7 @@ node-spider-blog
 
 ### 格式
 
-```json
+```
 {
     status_code: 0,
     data:[
