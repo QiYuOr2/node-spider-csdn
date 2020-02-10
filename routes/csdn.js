@@ -1,7 +1,14 @@
+/**
+ * csdn.js
+ * 获取某人csdn的原创文章
+ */
+
+ //#region 获取依赖
 const cheerio = require('cheerio');
 const superagent = require('superagent');
 const express = require('express');
 const eventproxy = require('eventproxy');
+//#endregion
 
 const router = express.Router();
 const ep = new eventproxy();
@@ -19,6 +26,7 @@ router.get('/csdn/:name', function (req, res) {
             pages.push(`https://blog.csdn.net/${name}/article/list/${i}?t=1`);
         }
 
+        // 获取所有页面的文章信息
         pages.forEach(function (targetUrl) {
             superagent.get(targetUrl).end(function (err, html) {
                 if (err) {
@@ -26,24 +34,25 @@ router.get('/csdn/:name', function (req, res) {
                 }
                 let $ = cheerio.load(html.text);
 
-                let articlesHtml = $('.article-list .article-item-box');
+                let articlesHtml = $('.article-list .article-item-box'); // 当前页面的文章列表
 
                 for (let i = 0; i < articlesHtml.length; i++) {
                     let article = analysisHtml(articlesHtml, i);
-
                     articleData.push(article);
-                    ep.emit('blogArtc', article);
+
+                    ep.emit('blogArtc', article); // 管理异步操作
                 }
             });
         });
+
+        // 异步读取完后发送响应
         ep.after('blogArtc', num, function (data) {
             res.json({
                 status_code: 0,
                 data: data
             });
         });
-    })
-
+    });
 });
 
 /**
