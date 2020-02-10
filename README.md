@@ -2,9 +2,24 @@
 
 这是一个非常垃圾的爬虫，用来获取博客文章
 
+## 目录结构
+
+```shell
+node-spider-blog
+├─ .gitignore
+├─ node_modules
+├─ README.md
+├─ index.js
+├─ package-lock.json
+├─ package.json
+└─ routes
+   └─ csdn.js
+```
+
 ## 功能
 
 - 目前只能获得CSDN文章
+- 准备添加获取博客园文章模块
 
 ## 依赖
 
@@ -22,8 +37,11 @@
 ## API文档
 
 ### 路由
+
 `/csdn/id` id为csdn的用户id
+
 ### 格式
+
 ```json
 {
     status_code: 0,
