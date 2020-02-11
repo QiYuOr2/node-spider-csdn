@@ -1,4 +1,4 @@
-# node-spider-blog
+# node-spider-csdn
 
 这是一个非常垃圾的爬虫，用来获取博客文章
 
@@ -18,8 +18,7 @@ node-spider-blog
 
 ## 功能
 
-- 目前只能获得CSDN文章
-- 准备添加获取博客园文章模块
+- 获得CSDN某用户原创文章
 
 ## 依赖
 
@@ -48,7 +47,6 @@ node-spider-blog
     data:[
         {
             id: "123456",
-            article_type: "原创",
             title: "标题",
             link: "文章连接",
             abstract: "文章概要",
