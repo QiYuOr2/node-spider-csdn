@@ -5,7 +5,7 @@
 ## 目录结构
 
 ```shell
-node-spider-blog
+node-spider-csdn
 ├─ .gitignore
 ├─ node_modules
 ├─ README.md
