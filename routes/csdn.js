@@ -14,7 +14,7 @@ const router = express.Router();
 const ep = new eventproxy();
 
 router.get('/csdn/:name', function (req, res) {
-    let name = req.params.name; // 用户账号
+    const name = req.params.name; // 用户账号
 
     getArticleNum(`https://blog.csdn.net/${name}`, function (num) {
         let articleData = []; // 保存所有文章数据
@@ -30,7 +30,7 @@ router.get('/csdn/:name', function (req, res) {
         pages.forEach(function (targetUrl) {
             superagent.get(targetUrl).end(function (err, html) {
                 if (err) {
-                    console.log(`err $err}`);
+                    console.log(`err ${err}`);
                 }
                 let $ = cheerio.load(html.text);
 
@@ -56,8 +56,9 @@ router.get('/csdn/:name', function (req, res) {
 });
 
 /**
- * 读取页面
- * @param {String} url 解析路径
+ * 获取总文章数目
+ * @param {String} url 页面路径
+ * @param {Function} callback 回调
  */
 let getArticleNum = function (url, callback) {
     superagent.get(url).end(function (err, html) {
@@ -78,7 +79,6 @@ let getArticleNum = function (url, callback) {
 let analysisHtml = function (html, index) {
     return {
         id: html.eq(index).attr('data-articleid'),
-        article_type: html.eq(index).find('h4 a').children().text(),
         title: html.eq(index).find('h4 a').text().replace(/\s+/g, '').slice(2),
         link: html.eq(index).find('a').attr('href'),
         abstract: html.eq(index).find('.content a').text().replace(/\s+/g, ''),
