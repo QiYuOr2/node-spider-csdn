@@ -5,7 +5,7 @@
 
  //#region 获取依赖
 const express = require('express');
-const csdn = require('./routes/csdn.js')
+const csdn = require('./routes/csdn.js');
 //#endregion
 
 const app = express();
