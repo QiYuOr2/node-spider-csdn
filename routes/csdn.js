@@ -74,7 +74,8 @@ let getArticleNum = function (url, callback) {
 
 /**
  * 解析html字符串，获取文章信息
- * @param {String} html 包含文章的html
+ * @param {String} html 包含文章信息的html
+ * @param {Number} index 文章索引
  */
 let analysisHtml = function (html, index) {
     return {
